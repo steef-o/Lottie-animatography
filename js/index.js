@@ -1,5 +1,4 @@
 
-
 const userInput = document.querySelector('#input');
 let textInputArray = [];
 userInput.addEventListener('keydown', matchCharacter);
@@ -13,7 +12,6 @@ function matchCharacter(e) {
     switch (e.key) {
         case 'Shift':
             break;
-
         case 'Space':
             textInputArray.push(" ");
             let emptyDiv = document.createElement("div");
@@ -26,7 +24,6 @@ function matchCharacter(e) {
             currentDiv.lastElementChild.remove();
             break;
         default:
-            //if(userInputValue[lastChar] === undefined) break; // fix for empty div caused by keydown.
             textInputArray.push(userInputValue[lastChar]);
             let newDiv = document.createElement("div");
             newDiv.className = "character";
@@ -57,24 +54,6 @@ function loadAnimation(character, targetDiv, remove) {
         });
     }
 }
-
-
-
-
-
-
-
-(function(window) {
-    function a() {
-
-    }
-
-
-    window.steffen = window.steffen || {};
-    window.steffen.a = a;
-})(window);
-
-
 
 
 
