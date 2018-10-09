@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+input {
+    margin-bottom: 1rem;
+}
+
+.character-wrapper {
+    display: grid;
+    /* Set number of characters pr line*/
+    grid-template-columns: repeat(15, 1fr);
+    grid-gap: 0;
+}
+
+.character{
+  /*  border: 1px solid crimson; */
+    margin: -50%;
+
+}
+
+.space {
+    margin-right: 70px;
+}

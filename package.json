@@ -1,0 +1,16 @@
+{
+  "name": "Lottie-Animatography",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/index.js",
+  "dependencies": {
+    "lottie-web": "^5.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
