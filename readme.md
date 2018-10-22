@@ -3,9 +3,9 @@ This project animates letters as they are written using lottie.js to render anim
 
 ## Installation
 Install packages then run a webserver to use the application.
-Open a terminal with npm installed, then run "npm install"
+Open a terminal with npm installed, then run `npm install`
 
 ## Running the project
-Open a terminal with npm installed, then run "npm start"
+Open a terminal with npm installed, then run `npm start`
 
 
