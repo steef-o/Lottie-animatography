@@ -1,5 +1,7 @@
 "use strict";
 
+//@TODO Create classes and restructure
+
 // Get users input from input-field in DOM.
 const userInput = document.querySelector('#input');
 
@@ -21,12 +23,16 @@ userInput.addEventListener('keydown', matchCharacter);
 // Initializes carot animation
 initCarot();
 
+// Set animation to Idle state.
+idleCarot();
+
 function matchCharacter(e) {
     switch (e.key) {
         // Special case.
         case 'Shift':
             break;
-        case 'Space':
+        //Space
+        case ' ':
             // Adds Empty div to DOM and space (' ') to array.
             createSpace();
             break;
@@ -51,9 +57,6 @@ function loadAnimation(character, targetDiv) {
             render: 'svg',
             loop: false,
             autoplay: false,
-            // checks if character is uppercase or lowercase and selects correct files from external .json files.
-            //@TODO create separate function for this logic.
-           // path: character.toString() === character.toString().toUpperCase() ?`./alphabet/Uppercase/${character}.json` : `./alphabet/Lowercase/${character}.json`
             path: findJSONPath(character)
     });
     // add character object to characterArray.
@@ -87,13 +90,14 @@ function createNewCharacter(character) {
 
 // Adds Empty div to DOM and push object with text set to(' ') to array.
 function createSpace() {
+    let emptyDiv = document.createElement("div");
     characterArray.push({
         text:' ',
         animationReference: null
     });
-    let emptyDiv = document.createElement("div");
-    emptyDiv.className = "space";
-    parentNode.appendChild(emptyDiv);
+
+    emptyDiv.className = "character space";
+    parentNode.insertBefore(emptyDiv, document.querySelector('.carot-wrapper'));
 }
 
 /*
@@ -108,29 +112,37 @@ function removeCharacter() {
     // Update dynamic deleteIndex, increases when user press backspace.
     deleteIndex <= (characterArray.length)? deleteIndex++: deleteIndex;
 
-    //Check if out-animation is completed.
-    animation.addEventListener('complete', function(){
+    console.log(animation);
 
-        // Remove object from array.
-        characterArray.splice(-1,1);
+    if(animation === null){
+        remove();
+    }else{
+        //Check if out-animation is completed.
+        animation.addEventListener('complete', remove);
+        // Play out-animation.
+        animation.playSegments([73,100],true);
+        animation.setSpeed(2.5);
+    }
+}
 
-        // Gets nodelist of all nodes with class .character
-        let childNodes = parentNode.querySelectorAll('.character');
+// removes object from array and DOM
+function remove(){
 
-        // Finds last node in nodelist.
-        let lastChild = childNodes[childNodes.length-1];
+    // Gets nodelist of all nodes with class .character
+    let childNodes = parentNode.querySelectorAll('.character');
 
-        //Remove object from DOM.
-        parentNode.removeChild(lastChild);
+    // Finds last node in nodelist.
+    let lastChild = childNodes[childNodes.length-1];
+    // Remove object from array.
+    characterArray.splice(-1,1);
 
-        // Update dynamic deleteIndex, decreases when object have finished out animation.
-        deleteIndex > 1? deleteIndex--: deleteIndex;
+    //Remove object from DOM.
+    parentNode.removeChild(lastChild);
 
-        idleCarot();
-    });
-    // Play out-animation.
-    animation.playSegments([73,100],true);
-    animation.setSpeed(2.5);
+    // Update dynamic deleteIndex, decreases when object have finished out animation.
+    deleteIndex > 1? deleteIndex--: deleteIndex;
+
+    idleCarot();
 }
 
 // Help function for finding correct JSON path to characters.
@@ -163,6 +175,7 @@ function initCarot() {
 function idleCarot(){
     let animation = utilArray[0].animationReference;
     animation.playSegments([0,30],true);
+    animation.loop = true;
 }
 
 function moveCarotForward(){
