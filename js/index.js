@@ -6,6 +6,9 @@ const userInput = document.querySelector('#input');
 // Array for storing user input
 let characterArray = [];
 
+// Array for Utility animations
+let utilArray = [];
+
 // Dynamic delete index.
 let deleteIndex = 1;
 
@@ -15,6 +18,8 @@ const parentNode = document.querySelector(".character-wrapper");
 // Listen for user input.
 userInput.addEventListener('keydown', matchCharacter);
 
+// Initializes carot animation
+initCarot();
 
 function matchCharacter(e) {
     switch (e.key) {
@@ -29,10 +34,12 @@ function matchCharacter(e) {
                 //Check If Input field is empty
                if(characterArray.length !== 0)
                    removeCharacter();
+                    moveCarotBackwards();
             break;
         default:
             // Adds new character to DOM and array.
             createNewCharacter(e.key);
+            moveCarotForward();
     }
 }
 
@@ -46,7 +53,8 @@ function loadAnimation(character, targetDiv) {
             autoplay: false,
             // checks if character is uppercase or lowercase and selects correct files from external .json files.
             //@TODO create separate function for this logic.
-            path: character.toString() === character.toString().toUpperCase() ?`./alphabet/Uppercase/${character}.json` : `./alphabet/Lowercase/${character}.json`
+           // path: character.toString() === character.toString().toUpperCase() ?`./alphabet/Uppercase/${character}.json` : `./alphabet/Lowercase/${character}.json`
+            path: findJSONPath(character)
     });
     // add character object to characterArray.
     characterArray.push({
@@ -58,14 +66,19 @@ function loadAnimation(character, targetDiv) {
         // plays animation from frame to frame.
         animation.playSegments([[0,72]],true);
     });
+
+    animation.addEventListener('complete', function(){
+        idleCarot();
+    });
 }
 
 // Adds new Character to dom and loads animation
 function createNewCharacter(character) {
     let newDiv = document.createElement("div");
     newDiv.className = "character";
-    parentNode.appendChild(newDiv);
+    parentNode.insertBefore( newDiv, document.querySelector('.carot-wrapper'));
     loadAnimation(character, newDiv);
+
 }
 
 
@@ -98,12 +111,62 @@ function removeCharacter() {
         // Remove object from array.
         characterArray.splice(-1,1);
 
+        // Gets nodelist of all nodes with class .character
+        let childNodes = parentNode.querySelectorAll('.character');
+
+        // Finds last node in nodelist.
+        let lastChild = childNodes[childNodes.length-1];
+
         //Remove object from DOM.
-        parentNode.lastElementChild.remove();
+        parentNode.removeChild(lastChild);
 
         // Update dynamic deleteIndex, decreases when object have finished out animation.
         deleteIndex > 1? deleteIndex--: deleteIndex;
+
+        idleCarot();
     });
     // Play out-animation.
-    animation.playSegments([[73,100]],true);
+    animation.playSegments([73,100],true);
+}
+
+// Help function for finding correct JSON path to characters.
+function findJSONPath(character){
+    if(character.toString() === character.toString().toUpperCase()){
+        return `./alphabet/Uppercase/${character}.json`
+    }else{
+        return `./alphabet/Lowercase/${character}.json`
+    }
+}
+
+function initCarot() {
+    const carot = lottie.loadAnimation({
+        container: document.querySelector('.carot-wrapper'),
+        render: 'svg',
+        loop: false,
+        autoplay: true,
+        path: `./alphabet/carot.json`
+    });
+    carot.addEventListener('data_ready',function(){
+        // plays animation from frame to frame.
+        carot.playSegments([0,30],true);
+    });
+
+    utilArray.push({
+        animationReference: carot,
+    })
+}
+
+function idleCarot(){
+    let animation = utilArray[0].animationReference;
+    animation.playSegments([0,30],true);
+}
+
+function moveCarotForward(){
+    let animation = utilArray[0].animationReference;
+    animation.playSegments([30,50],true);
+}
+
+function moveCarotBackwards(){
+    let animation = utilArray[0].animationReference;
+    animation.playSegments([52,73],true);
 }
