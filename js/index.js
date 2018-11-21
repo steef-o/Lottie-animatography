@@ -34,7 +34,7 @@ function matchCharacter(e) {
                 //Check If Input field is empty
                if(characterArray.length !== 0)
                    removeCharacter();
-                    moveCarotBackwards();
+                   moveCarotBackwards();
             break;
         default:
             // Adds new character to DOM and array.
@@ -75,7 +75,10 @@ function loadAnimation(character, targetDiv) {
 // Adds new Character to dom and loads animation
 function createNewCharacter(character) {
     let newDiv = document.createElement("div");
-    newDiv.className = "character";
+
+    //Uncomment to use randomColor function,
+    /*newDiv.className = "character " + randomColor(); */
+    newDiv.className = "character ";
     parentNode.insertBefore( newDiv, document.querySelector('.carot-wrapper'));
     loadAnimation(character, newDiv);
 
@@ -103,10 +106,10 @@ function removeCharacter() {
     let animation = characterArray[characterArray.length - deleteIndex].animationReference;
 
     // Update dynamic deleteIndex, increases when user press backspace.
-    deleteIndex < (characterArray.length - 1)? deleteIndex++: deleteIndex;
+    deleteIndex <= (characterArray.length)? deleteIndex++: deleteIndex;
 
     //Check if out-animation is completed.
-    animation.addEventListener('complete', () => {
+    animation.addEventListener('complete', function(){
 
         // Remove object from array.
         characterArray.splice(-1,1);
@@ -127,6 +130,7 @@ function removeCharacter() {
     });
     // Play out-animation.
     animation.playSegments([73,100],true);
+    animation.setSpeed(2.5);
 }
 
 // Help function for finding correct JSON path to characters.
@@ -163,10 +167,39 @@ function idleCarot(){
 
 function moveCarotForward(){
     let animation = utilArray[0].animationReference;
-    animation.playSegments([30,50],true);
+    animation.playSegments([30,52],true);
 }
 
 function moveCarotBackwards(){
     let animation = utilArray[0].animationReference;
-    animation.playSegments([52,73],true);
+    animation.playSegments([[51,73],[0,1]],true);
+}
+
+
+// Support for random colors for characters
+function randomColor() {
+    var randomNumber = Math.floor((Math.random()*10)+1);
+    console.log(randomNumber);
+    switch (randomNumber) {
+        case 1:
+            return"red";
+        case 2:
+            return"green";
+        case 3:
+            return"blue";
+        case 4:
+            return"yellow";
+        case 5:
+            return"brown";
+        case 6:
+            return"orange";
+        case 7:
+            return"cyan";
+        case 8:
+            return"magenta";
+        case 9:
+            return"turquoise";
+        default:
+            return "pink";
+    }
 }

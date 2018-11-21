@@ -42,3 +42,40 @@ input::placeholder {
 .space {
     margin-right: 70px;
 }
+
+.red svg g g path{
+    stroke:red;
+}
+.blue svg g g path{
+     stroke:blue;
+ }
+.yellow svg g g path{
+    stroke:yellow;
+}
+.green svg g g path{
+    stroke:green;
+}
+.pink svg g g path{
+    stroke:pink;
+}
+.brown svg g g path{
+    stroke:brown;
+}
+
+.orange svg g g path{
+    stroke:orangered;
+}
+
+.turquoise svg g g path{
+    stroke:turquoise;
+}
+
+.magenta svg g g path{
+    stroke:magenta;
+}
+.cyan svg g g path{
+    stroke:cyan;
+}
+
+
+
