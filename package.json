@@ -2,7 +2,7 @@
   "name": "Lottie-Animatography",
   "version": "1.0.0",
   "description": "",
-  "main": "js/index.js",
+  "main": "js/app.js",
   "dependencies": {
     "http-server": "^0.11.1",
     "lottie-web": "^5.2.1"
