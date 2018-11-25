@@ -20,63 +20,32 @@ input::placeholder {
     color:#DDD;
 }
 
-
 .character-wrapper {
     display: grid;
     /* Set number of characters pr line*/
     grid-template-columns: repeat(20, 1fr);
     grid-gap: 0;
     margin-top: -92px;
-    /* border: 1px solid black; */
 }
 
 .carot-wrapper svg g g g path {
     fill: #DDDDDD;
 }
 
-.character{
-  /*  border: 1px solid crimson; */
+.character {
     margin: -50%;
-
 }
-
-.space {
-    margin-right: 70px;
-}
-
-.red svg g g path{
-    stroke:red;
-}
-.blue svg g g path{
-     stroke:blue;
- }
-.yellow svg g g path{
-    stroke:yellow;
-}
-.green svg g g path{
-    stroke:green;
-}
-.pink svg g g path{
-    stroke:pink;
-}
-.brown svg g g path{
-    stroke:brown;
-}
-
-.orange svg g g path{
-    stroke:orangered;
-}
-
-.turquoise svg g g path{
-    stroke:turquoise;
-}
-
-.magenta svg g g path{
-    stroke:magenta;
-}
-.cyan svg g g path{
-    stroke:cyan;
-}
+/* Classes for random color */
+.red svg g g path { stroke:red; }
+.blue svg g g path { stroke:blue; }
+.yellow svg g g path { stroke:yellow; }
+.green svg g g path { stroke:green; }
+.pink svg g g path { stroke:pink; }
+.brown svg g g path { stroke:brown; }
+.orange svg g g path { stroke:orangered; }
+.turquoise svg g g path { stroke:turquoise; }
+.magenta svg g g path { stroke:magenta; }
+.cyan svg g g path { stroke:cyan; }
 
 
 
