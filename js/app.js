@@ -21,11 +21,11 @@ const parentNode = document.querySelector(".character-wrapper");
 // Listen for user input.
 userInput.addEventListener('keydown', matchCharacter);
 
-// Initialize carot animation.
-const carot = new Carot();
+// Initialize caret animation.
+const caret = new Caret();
 
 // Set animation to Idle animation state.
-carot.idleCarot();
+caret.idleCaret();
 
 function matchCharacter(e) {
     switch (e.key) {
@@ -44,7 +44,7 @@ function matchCharacter(e) {
                 //Check if input field is empty.
                if(characterArray.length !== 0)
                    removeCharacter();
-                   carot.moveCarotBackwards();
+                   caret.moveCaretBackwards();
             break;
 
         // Add character.
@@ -53,7 +53,7 @@ function matchCharacter(e) {
             let regex = new RegExp("^([a-zA-z0-9])$");
             if(regex.test(e.key)){
                 createNewCharacter(e.key);
-                carot.moveCarotForward();
+                caret.moveCaretForward();
             } else {
             // Do nothing, give user feedback in console.
             console.log(e.key,"was entered and is an invalid input value, please enter a valid input value within the range: (A-Z, a-z ,0-9, 'Spacebar')");
@@ -69,7 +69,7 @@ function createSpace() {
         animationReference: null
     });
     emptyDiv.className = "character space";
-    parentNode.insertBefore(emptyDiv, document.querySelector('.carot-wrapper'));
+    parentNode.insertBefore(emptyDiv, document.querySelector('.caret-wrapper'));
 }
 
 // Adds new Character to DOM and runs loadCharacterAnimation function.
@@ -77,7 +77,7 @@ function createNewCharacter(character) {
     let newDiv = document.createElement("div");
     // newDiv.className = "character " + RandomColor.createRandomColor();
     newDiv.className = "character ";
-    parentNode.insertBefore( newDiv, document.querySelector('.carot-wrapper'));
+    parentNode.insertBefore( newDiv, document.querySelector('.caret-wrapper'));
     loadCharacterAnimation(character, newDiv);
 }
 
@@ -103,7 +103,7 @@ function loadCharacterAnimation(character, targetDiv) {
 
     // Listen for animation to finish.
     animation.addEventListener('complete', function(){
-        carot.idleCarot();
+        caret.idleCaret();
     });
 }
 
@@ -150,8 +150,8 @@ function _remove() {
     // Update dynamic deleteIndex, decreases when object have finished out animation.
     deleteIndex > 1 ? deleteIndex-- : deleteIndex;
 
-    // Set carot to idle animation state.
-    carot.idleCarot();
+    // Set caret to idle animation state.
+    caret.idleCaret();
 }
 
 // Help function for finding correct character animation .JSON path.

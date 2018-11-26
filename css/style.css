@@ -10,6 +10,7 @@ input {
     font-size: 4rem;
     color:white;
     margin-left: -418px;
+    cursor: none;
 }
 
 input:focus{
@@ -28,7 +29,7 @@ input::placeholder {
     margin-top: -92px;
 }
 
-.carot-wrapper svg g g g path {
+.caret-wrapper svg g g g path {
     fill: #DDDDDD;
 }
 
@@ -46,6 +47,3 @@ input::placeholder {
 .turquoise svg g g path { stroke:turquoise; }
 .magenta svg g g path { stroke:magenta; }
 .cyan svg g g path { stroke:cyan; }
-
-
-

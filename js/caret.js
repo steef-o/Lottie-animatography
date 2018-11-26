@@ -1,35 +1,35 @@
 
-class Carot {
+class Caret {
     constructor() {
-        const carot = lottie.loadAnimation({
-            container: document.querySelector('.carot-wrapper'),
+        const caret = lottie.loadAnimation({
+            container: document.querySelector('.caret-wrapper'),
             render: 'svg',
             loop: false,
             autoplay: true,
-            path: `./alphabet/carot.json`
+            path: `./alphabet/caret.json`
         });
-        carot.addEventListener('data_ready', function () {
+        caret.addEventListener('data_ready', function () {
             // plays animation from frame to frame.
-            carot.playSegments([0, 30], true);
+            caret.playSegments([0, 30], true);
         });
 
         utilArray.push({
-            animationReference: carot,
+            animationReference: caret,
         })
     }
 
-     idleCarot(){
+     idleCaret(){
         let animation = utilArray[0].animationReference;
         animation.playSegments([0,30],true);
         animation.loop = true;
     }
 
-     moveCarotForward(){
+     moveCaretForward(){
         let animation = utilArray[0].animationReference;
         animation.playSegments([30,52],true);
     }
 
-     moveCarotBackwards(){
+     moveCaretBackwards(){
         let animation = utilArray[0].animationReference;
         animation.playSegments([[51,73],[0,1]],true);
     }
